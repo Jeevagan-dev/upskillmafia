@@ -111,7 +111,7 @@ p{
         display: flex;
         max-height: auto;
     } 
-    
+
     .mar{
         flex-direction: column;
         align-items: center;
@@ -131,6 +131,9 @@ p{
     }
     body{
         max-width: auto;
+    }
+    ul{
+        display: none;
     }
 }
 
