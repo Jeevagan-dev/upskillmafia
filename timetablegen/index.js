@@ -1,0 +1,131 @@
+// script.js
+let subjects = [];
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const periods = 8;
+
+function addSubjectFields() {
+    const courses = document.getElementById('courses').value;
+    const subjectsContainer = document.getElementById('subjects-container');
+    subjectsContainer.innerHTML = '';
+
+    for (let i = 0; i < courses; i++) {
+        const subjectInput = document.createElement('input');
+        subjectInput.type = 'text';
+        subjectInput.placeholder = `Subject ${i + 1} Name`;
+        subjectInput.id = `subject-${i}`;
+        subjectsContainer.appendChild(subjectInput);
+        subjectsContainer.appendChild(document.createElement('br'));
+    }
+}
+
+function generateTimetable() {
+    const sections = document.getElementById('sections').value;
+    const courses = document.getElementById('courses').value;
+    subjects = [];
+
+    for (let i = 0; i < courses; i++) {
+        subjects.push(document.getElementById(`subject-${i}`).value);
+    }
+
+    let timetableContainer = document.getElementById('timetable-container');
+    timetableContainer.innerHTML = ''; // Clear previous timetable
+
+    const timetables = Array.from({ length: sections }, () =>
+        Array.from({ length: days.length }, () => Array(periods).fill(null))
+    );
+
+    // Assign lab sessions
+    const labDays = getRandomDays(3); // Select 3 random days for labs
+
+    for (let section = 0; section < sections; section++) {
+        labDays.forEach(dayIndex => {
+            let period = getRandomLabPeriod();
+            timetables[section][dayIndex][period] = `Lab Batch 1`;
+            timetables[section][dayIndex][period + 1] = `Lab Batch 1`;
+            timetables[section][dayIndex][period + 2] = `Lab Batch 2`;
+            timetables[section][dayIndex][period + 3] = `Lab Batch 2`;
+        });
+    }
+
+    // Fill remaining timetable ensuring no conflicts in the same period across sections
+    days.forEach((day, dayIndex) => {
+        for (let period = 0; period < periods; period++) {
+            let availableSubjects = [...subjects];
+            for (let section = 0; section < sections; section++) {
+                if (!timetables[section][dayIndex][period]) {
+                    if (availableSubjects.length === 0) {
+                        availableSubjects = [...subjects];
+                    }
+                    const subjectIndex = Math.floor(Math.random() * availableSubjects.length);
+                    const subject = availableSubjects.splice(subjectIndex, 1)[0];
+                    timetables[section][dayIndex][period] = subject;
+                }
+            }
+        }
+    });
+
+    // Render timetables
+    for (let section = 0; section < sections; section++) {
+        let table = document.createElement('table');
+        let thead = document.createElement('thead');
+        let tbody = document.createElement('tbody');
+
+        // Create table header
+        let headerRow = document.createElement('tr');
+        let headerCell = document.createElement('th');
+        headerCell.innerText = `Section ${section + 1}`;
+        headerRow.appendChild(headerCell);
+        for (let period = 1; period <= periods; period++) {
+            let cell = document.createElement('th');
+            cell.innerText = `Period ${period}`;
+            headerRow.appendChild(cell);
+        }
+        thead.appendChild(headerRow);
+
+        // Create table body
+        days.forEach((day, dayIndex) => {
+            let row = document.createElement('tr');
+            let dayCell = document.createElement('td');
+            dayCell.innerText = day;
+            row.appendChild(dayCell);
+
+            for (let period = 0; period < periods; period++) {
+                let cell = document.createElement('td');
+                cell.innerText = timetables[section][dayIndex][period];
+                row.appendChild(cell);
+            }
+
+            tbody.appendChild(row);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        timetableContainer.appendChild(table);
+    }
+}
+
+function getRandomDays(count) {
+    const randomDays = new Set();
+    while (randomDays.size < count) {
+        randomDays.add(Math.floor(Math.random() * days.length));
+    }
+    return Array.from(randomDays);
+}
+
+function getRandomLabPeriod() {
+    const validLabPeriods = [0, 2, 4, 6]; // Starting periods for continuous lab sessions
+    return validLabPeriods[Math.floor(Math.random() * validLabPeriods.length)];
+}
+
+function exportToExcel() {
+    const tables = document.querySelectorAll('table');
+    const wb = XLSX.utils.book_new();
+
+    tables.forEach((table, index) => {
+        const ws = XLSX.utils.table_to_sheet(table);
+        XLSX.utils.book_append_sheet(wb, ws, `Section ${index + 1}`);
+    });
+
+    XLSX.writeFile(wb, 'CollegeTimetable.xlsx');
+}
+
