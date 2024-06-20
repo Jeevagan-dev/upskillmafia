@@ -79,11 +79,33 @@ p{
    display: inline-block;
     
 }
-
+.content1{
+    animation: orbit 1.5s linear infinite ;
+  
+}
 .float-right{
     float: right;
     width: 400px;
+    animation: squeeze 2.5s ease-in-out infinite alternate;
+   
+ 
 }
+@keyframes orbit {
+    0% {
+      transform: rotate(0deg)  translateX(20px) rotate(0deg);
+    }
+    100% {
+      transform:  rotate(360deg) translateX(20px) rotate(-360deg);
+    }
+  }
+  @keyframes squeeze {
+    0%, 100% {
+      transform: scale(1) ;
+    }
+    50% {
+      transform: scale(0.9);
+    } 
+ }
 .menu {
     display: none;
 }
