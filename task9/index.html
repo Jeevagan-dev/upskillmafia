@@ -7,15 +7,16 @@
 </head>
 <body>
     <script>
-        var P,r,n,t ;
-        P = 200000;
-        r = 7;
-        n = 2;
-        t = 3;
-        var A=P*(1+(r/n))^n*t ;
-        document.write('The compound interest after '+t+' years is: ' + A
+
+        let principle , rateOfIntrest , numTimes ,times , amount;
+        principle = 200000;
+        rateOfIntrest = 7/100;
+        numTimes = 2;
+        times = 3;
+        amount = principle * Math.pow((1+rateOfIntrest/numTimes),numTimes*times );
+        document.write('The compound interest after '+times+' years is: ' + amount
         ); 
-        console.log('The compound interest after '+t+' years is: ' + A);
+        console.log('The compound interest after '+times+' years is: ' + amount);
     </script>
 </body>
 </html>
