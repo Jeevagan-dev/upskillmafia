@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 11</title>
+</head>
+<body>
+    <script>
+
+     function sumOfDigits(num){
+      let number = num.toString();
+      let sum = 0;
+      let amStrong = 0;
+      let isprime = true;
+      document.write('<h1> The given number is '+num+ '</h1>'); 
+      for(let i = 0 ; i<number.length;i++){
+        sum += parseInt(number.charAt(i));
+        amStrong += Math.pow(parseInt(number.charAt(i)),number.length);
+      }
+      document.write('<h1> The sum is ',sum,'</h1>');
+    if(num == amStrong){
+        document.write('<h1> is number is amstrong : true </h1>'); 
+    }
+    else{
+        document.write('<h1> is number is amstrong : false </h1>'); 
+    }
+    
+    if (num <= 1) {
+      isPrime = false;
+    } else {
+      for (let i = 2; i < num; i++) {
+        if (num % i === 0) {
+          isPrime = false;
+          break; 
+        }
+      }
+    }
+
+      let factors = [];
+      for (let i = 1; i <= number; i++) {
+        if (number % i === 0) {
+          factors.push(i); 
+        }
+    }
+
+    document.write(`<h1> is number is prime : ${isprime} </h1>`); 
+    if(isprime){
+        document.write(`<h1> is number is prime factors: ${factors} </h1>`); 
+    }
+}
+     sumOfDigits(parseInt(prompt('Enter number to check ?')));
+    </script>
+</body>
+</html>
