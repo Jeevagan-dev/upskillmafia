@@ -38,16 +38,16 @@
     }
 
       let factors = [];
-      for (let i = 1; i <= number; i++) {
-        if (number % i === 0) {
+      for (let i = 1; i <= num; i++) {
+        if (num % i === 0) {
           factors.push(i); 
         }
     }
 
     document.write(`<h1> is number is prime : ${isPrime} </h1>`); 
-    if(isprime){
+  
         document.write(`<h1> is number is prime factors: ${factors} </h1>`); 
-    }
+    
 }
      sumOfDigits(parseInt(prompt('Enter number to check ?')));
     </script>
