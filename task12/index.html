@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task12</title>
+  </head>
+  <body>
+    <script>
+      let array = [10, 2, 7, 99, 163, 3, 6, 9];
+
+      console.log(array);
+
+      function sum(array) {
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+          sum += array[i];
+        }
+        console.log(`The sum of the given array is ${sum}`);
+        document.write(`<h1>The sum of the given array is ${sum}</h1>`);
+      }
+
+      let maximum = (array) => {
+        let max = 0;
+        for (let i = 0; i < array.length; i++) {
+          if (max <= array[i]) {
+            max = array[i];
+          }
+        }
+        console.log(`The max of the given array is ${max}`);
+        document.write(`<h1>The max of the given array is ${max}</h1>`);
+      };
+
+      let findOdd = function (array) {
+        let odd = 0;
+        for (let i = 0; i < array.length; i++) {
+          if (array[i] % 3 == 0) {
+            odd++;
+          }
+        }
+        console.log(`The odd terms of the given array is ${odd}`);
+        document.write(`<h1>The odd terms of the given array is ${odd}</h1>`);
+      };
+      document.write(`<h1>The given array is ${array}</h1>`);
+      maximum(array);
+      sum(array);
+      findOdd(array);
+    </script>
+  </body>
+</html>
