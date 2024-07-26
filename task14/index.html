@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body>
+    <script>
+        let divisionOfTwoDigit = (num1 , num2) => {
+            let division = new Promise ((dividable , nondividable )=>{
+                if(num2 != 0){
+                    document.write('<h1>given number ' + num1 +','+ num2+'</h1>');
+                    dividable(document.write('<h1>Result :'+ num1/num2 +'</h1>'));
+                }
+                else{
+                    document.write('<h1>given number ' + num1 +','+ num2+'</h1>');
+                    nondividable(document.write("<h1>Error : Can't divide by zero </h1>"));
+                }
+            })
+        }
+           
+      
+
+        divisionOfTwoDigit(Math.round(Math.random(1)*200),0);
+        divisionOfTwoDigit(Math.round(Math.random(1)*200),Math.round(Math.random(1)*50))
+    </script>
+</body>
+</html>
