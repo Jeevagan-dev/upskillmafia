@@ -11,7 +11,7 @@ console.log('problem2');
 // const studentMark = parseInt(prompt('Enter your mark'));
 const studentMark = 39 ;
 
-const Grade = studentMark > 80 ? "A" : studentMark > 60 ? "B" : studentMark > 40 ? "C" : "F";
+const Grade = studentMark > 80 ? "A" : studentMark > 60 ? "B" : studentMark > 40 ? "C":studentMark > 30 ? "D" : "F";
 
 console.log(Grade);
 
