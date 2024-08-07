@@ -1,0 +1,22 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+section{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.billing{
+    width: 400px;
+    height: 600px;
+    background-color: orangered;
+    color: aliceblue;
+    text-align: center;
+    font-size: 25px;
+}
+.browse{
+    width: 400px;
+    height: 600px;
+    background-color: black;
+    color: white;
+}

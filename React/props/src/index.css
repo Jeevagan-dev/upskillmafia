@@ -1,0 +1,31 @@
+.card-container {
+ 
+  display: grid;
+  grid-template-columns: 300px 300px 300px; /* Adjusted syntax for flexible grid columns */
+  grid-column-gap: 50px;
+  text-align: center;
+}
+section {
+ margin: 10vh 10vw;
+}
+@keyframes gradientBorderAnimation {
+  0% {
+    border-image: linear-gradient(45deg, #5fff7c, #feb47b) 1;
+  }
+  50% {
+    border-image: linear-gradient(45deg, #c72115, #ff7e5f) 1;
+  }
+  100% {
+    border-image: linear-gradient(45deg, #ff7e5f, #1e0eb2) 1;
+  }
+}
+
+.cards {
+  margin: 40px;
+  border: 5px solid transparent;
+  border-image: linear-gradient(45deg, #ff7e5f, #feb47b) 1;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  animation: gradientBorderAnimation 3s infinite; /* Apply the animation */
+}
