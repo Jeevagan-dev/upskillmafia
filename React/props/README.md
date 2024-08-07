@@ -1,6 +1,6 @@
 # React + Vite
 
-- ([Web link](https://animated-kheer-d3217f.netlify.app/))
+- ([Web link](https://animated-kheer-d3217f.netlify.app/))  https://animated-kheer-d3217f.netlify.app/
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
