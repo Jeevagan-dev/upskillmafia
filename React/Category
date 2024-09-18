@@ -1,0 +1,120 @@
+import React, { useState } from 'react';
+
+function ToDoList() {
+    const [tasks, setTasks] = useState([]);
+    const [newTask, setNewTask] = useState("");
+    const [deadline, setDeadline] = useState("");
+    const [category, setCategory] = useState("");
+    const [filterCategory, setFilterCategory] = useState("All");
+
+    function handleTaskInputChange(event) {
+        setNewTask(event.target.value);
+    }
+
+    function handleDeadlineChange(event) {
+        setDeadline(event.target.value);
+    }
+
+    function handleCategoryChange(event) {
+        setCategory(event.target.value);
+    }
+
+    function handleFilterChange(event) {
+        setFilterCategory(event.target.value);
+    }
+
+    function addTask() {
+        if (newTask.trim() !== "" && deadline.trim() !== "" && category.trim() !== "") {
+            setTasks(t => [...t, { task: newTask, deadline, category }]);
+            setNewTask("");
+            setDeadline("");
+            setCategory("");
+        }
+    }
+
+    function deleteTask(index) {
+        const updatedTasks = tasks.filter((_, i) => i !== index);
+        setTasks(updatedTasks);
+    }
+
+    function moveTaskUp(index) {
+        if (index > 0) {
+            const updatedTasks = [...tasks];
+            [updatedTasks[index], updatedTasks[index - 1]] = [updatedTasks[index - 1], updatedTasks[index]];
+            setTasks(updatedTasks);
+        }
+    }
+
+    function moveTaskDown(index) {
+        if (index < tasks.length - 1) {
+            const updatedTasks = [...tasks];
+            [updatedTasks[index], updatedTasks[index + 1]] = [updatedTasks[index + 1], updatedTasks[index]];
+            setTasks(updatedTasks);
+        }
+    }
+
+    // Filter tasks based on selected category
+    const filteredTasks = filterCategory === "All"
+        ? tasks
+        : tasks.filter(taskItem => taskItem.category === filterCategory);
+
+    return (
+        <div className="to-do-list">
+            <h1>To-Do List</h1>
+
+            <div>
+                <input
+                    type="text"
+                    placeholder="Enter a task..."
+                    value={newTask}
+                    onChange={handleTaskInputChange}
+                />
+                <input
+                    type="date"
+                    value={deadline}
+                    onChange={handleDeadlineChange}
+                />
+                <input
+                    type="text"
+                    placeholder="Enter category..."
+                    value={category}
+                    onChange={handleCategoryChange}
+                />
+                <button className="add-button" onClick={addTask}>
+                    Add
+                </button>
+            </div>
+
+            {/* Filter Option */}
+            <div>
+                <label htmlFor="filter">Filter by Category:</label>
+                <select id="filter" value={filterCategory} onChange={handleFilterChange}>
+                    <option value="All">All</option>
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+
+            <ol>
+                {filteredTasks.map((taskItem, index) =>
+                    <li key={index}>
+                        <span className="text">{taskItem.task} - {taskItem.deadline} - {taskItem.category}</span>
+                        <button className="delete-button" onClick={() => deleteTask(index)}>
+                            Delete
+                        </button>
+                        <button className="move-button" onClick={() => moveTaskUp(index)}>
+                            ☝
+                        </button>
+                        <button className="move-button" onClick={() => moveTaskDown(index)}>
+                            👇
+                        </button>
+                    </li>
+                )}
+            </ol>
+        </div>
+    );
+}
+
+export default ToDoList;
